@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sans.core.mapper.RmMapMapper">
+  <resultMap id="BaseResultMap" type="com.sans.core.entity.RmMap">
+    <!--
+    @mbg.generated
+    -->
+    <id column="RM_MAP" jdbcType="VARCHAR" property="rmMap" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="DELETE_DATE" jdbcType="TIMESTAMP" property="deleteDate" />
+    <result column="CREATE_USER_LABEL" jdbcType="VARCHAR" property="createUserLabel" />
+    <result column="UPDATE_USER_LABEL" jdbcType="VARCHAR" property="updateUserLabel" />
+    <result column="DELETE_USER_LABEL" jdbcType="VARCHAR" property="deleteUserLabel" />
+    <result column="RECORD_VERSION" jdbcType="INTEGER" property="recordVersion" />
+    <result column="ROLE_GUID" jdbcType="VARCHAR" property="roleGuid" />
+    <result column="MENU_GUID" jdbcType="VARCHAR" property="menuGuid" />
+  </resultMap>
+
+  <resultMap id="BaseResulMenutMap" type="com.sans.core.entity.Menu">
+    <!--
+    @mbg.generated
+    -->
+    <id column="MENU_GUID" jdbcType="VARCHAR" property="menuGuid" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="DELETE_DATE" jdbcType="TIMESTAMP" property="deleteDate" />
+    <result column="CREATE_USER_LABEL" jdbcType="VARCHAR" property="createUserLabel" />
+    <result column="UPDATE_USER_LABEL" jdbcType="VARCHAR" property="updateUserLabel" />
+    <result column="DELETE_USER_LABEL" jdbcType="VARCHAR" property="deleteUserLabel" />
+    <result column="RECORD_VERSION" jdbcType="INTEGER" property="recordVersion" />
+    <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="MENU_ORDER" jdbcType="INTEGER" property="menuOrder" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="TARGET" jdbcType="VARCHAR" property="target" />
+    <result column="MENU_TYPE" jdbcType="CHAR" property="menuType" />
+    <result column="MENU_STATUS" jdbcType="CHAR" property="menuStatus" />
+    <result column="PERMS" jdbcType="VARCHAR" property="perms" />
+    <result column="ICON" jdbcType="VARCHAR" property="icon" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+    @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    RM_MAP, CREATE_DATE, UPDATE_DATE, DELETE_DATE, CREATE_USER_LABEL, UPDATE_USER_LABEL, 
+    DELETE_USER_LABEL, RECORD_VERSION, ROLE_GUID, MENU_GUID
+  </sql>
+  <select id="selectByExample" parameterType="com.sans.core.entity.RmMapExample" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_rm_map
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="findAllMenuByUserNo" parameterType="java.lang.String" resultMap="BaseResulMenutMap">
+    SELECT d.*
+    from t_ur_map a
+    left join t_user u on u.USER_GUID=a.USER_GUID
+    left join t_role b on a.ROLE_GUID=b.ROLE_GUID
+    left join t_rm_map c on b.ROLE_GUID=c.ROLE_GUID
+    left join t_menu d on c.MENU_GUID=d.MENU_GUID
+    WHERE d.MENU_STATUS=0
+    <if test="userNo!='' and userNo!=null">
+        and  u.USER_NO=#{userNo,jdbcType=VARCHAR}
+    </if>
+    ORDER BY MENU_ORDER asc
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from t_rm_map
+    where RM_MAP = #{rmMap,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+    @mbg.generated
+    -->
+    delete from t_rm_map
+    where RM_MAP = #{rmMap,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sans.core.entity.RmMap">
+    <!--
+    @mbg.generated
+    -->
+    insert into t_rm_map (RM_MAP, CREATE_DATE, UPDATE_DATE, 
+      DELETE_DATE, CREATE_USER_LABEL, UPDATE_USER_LABEL, 
+      DELETE_USER_LABEL, RECORD_VERSION, ROLE_GUID, 
+      MENU_GUID)
+    values (#{rmMap,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{deleteDate,jdbcType=TIMESTAMP}, #{createUserLabel,jdbcType=VARCHAR}, #{updateUserLabel,jdbcType=VARCHAR}, 
+      #{deleteUserLabel,jdbcType=VARCHAR}, #{recordVersion,jdbcType=INTEGER}, #{roleGuid,jdbcType=VARCHAR}, 
+      #{menuGuid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sans.core.entity.RmMap">
+    <!--
+    @mbg.generated
+    -->
+    insert into t_rm_map
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rmMap != null">
+        RM_MAP,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="deleteDate != null">
+        DELETE_DATE,
+      </if>
+      <if test="createUserLabel != null">
+        CREATE_USER_LABEL,
+      </if>
+      <if test="updateUserLabel != null">
+        UPDATE_USER_LABEL,
+      </if>
+      <if test="deleteUserLabel != null">
+        DELETE_USER_LABEL,
+      </if>
+      <if test="recordVersion != null">
+        RECORD_VERSION,
+      </if>
+      <if test="roleGuid != null">
+        ROLE_GUID,
+      </if>
+      <if test="menuGuid != null">
+        MENU_GUID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rmMap != null">
+        #{rmMap,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null">
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserLabel != null">
+        #{createUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserLabel != null">
+        #{updateUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteUserLabel != null">
+        #{deleteUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="recordVersion != null">
+        #{recordVersion,jdbcType=INTEGER},
+      </if>
+      <if test="roleGuid != null">
+        #{roleGuid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuGuid != null">
+        #{menuGuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sans.core.entity.RmMap">
+    <!--
+    @mbg.generated
+    -->
+    update t_rm_map
+    <set>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null">
+        DELETE_DATE = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserLabel != null">
+        CREATE_USER_LABEL = #{createUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserLabel != null">
+        UPDATE_USER_LABEL = #{updateUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteUserLabel != null">
+        DELETE_USER_LABEL = #{deleteUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="recordVersion != null">
+        RECORD_VERSION = #{recordVersion,jdbcType=INTEGER},
+      </if>
+      <if test="roleGuid != null">
+        ROLE_GUID = #{roleGuid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuGuid != null">
+        MENU_GUID = #{menuGuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RM_MAP = #{rmMap,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sans.core.entity.RmMap">
+    <!--
+    @mbg.generated
+    -->
+    update t_rm_map
+    set CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      DELETE_DATE = #{deleteDate,jdbcType=TIMESTAMP},
+      CREATE_USER_LABEL = #{createUserLabel,jdbcType=VARCHAR},
+      UPDATE_USER_LABEL = #{updateUserLabel,jdbcType=VARCHAR},
+      DELETE_USER_LABEL = #{deleteUserLabel,jdbcType=VARCHAR},
+      RECORD_VERSION = #{recordVersion,jdbcType=INTEGER},
+      ROLE_GUID = #{roleGuid,jdbcType=VARCHAR},
+      MENU_GUID = #{menuGuid,jdbcType=VARCHAR}
+    where RM_MAP = #{rmMap,jdbcType=VARCHAR}
+  </update>
+</mapper>

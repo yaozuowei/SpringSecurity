@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sans.core.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.sans.core.entity.Role">
+    <!--
+    @mbg.generated
+    -->
+    <id column="ROLE_GUID" jdbcType="VARCHAR" property="roleGuid" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="DELETE_DATE" jdbcType="TIMESTAMP" property="deleteDate" />
+    <result column="CREATE_USER_LABEL" jdbcType="VARCHAR" property="createUserLabel" />
+    <result column="UPDATE_USER_LABEL" jdbcType="VARCHAR" property="updateUserLabel" />
+    <result column="DELETE_USER_LABEL" jdbcType="VARCHAR" property="deleteUserLabel" />
+    <result column="RECORD_VERSION" jdbcType="INTEGER" property="recordVersion" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="ROLE_KEY" jdbcType="VARCHAR" property="roleKey" />
+    <result column="ROLE_ORDER" jdbcType="INTEGER" property="roleOrder" />
+    <result column="ROLE_STATUS" jdbcType="INTEGER" property="roleStatus" />
+    <result column="ROLE_DLE_FLAG" jdbcType="INTEGER" property="roleDleFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+    @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    ROLE_GUID, CREATE_DATE, UPDATE_DATE, DELETE_DATE, CREATE_USER_LABEL, UPDATE_USER_LABEL, 
+    DELETE_USER_LABEL, RECORD_VERSION, ROLE_NAME, ROLE_KEY, ROLE_ORDER, ROLE_STATUS, 
+    ROLE_DLE_FLAG
+  </sql>
+  <select id="selectByExample" parameterType="com.sans.core.entity.RoleExample" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from t_role
+    where ROLE_GUID = #{roleGuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+    @mbg.generated
+    -->
+    delete from t_role
+    where ROLE_GUID = #{roleGuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sans.core.entity.Role">
+    <!--
+    @mbg.generated
+    -->
+    insert into t_role (ROLE_GUID, CREATE_DATE, UPDATE_DATE, 
+      DELETE_DATE, CREATE_USER_LABEL, UPDATE_USER_LABEL, 
+      DELETE_USER_LABEL, RECORD_VERSION, ROLE_NAME, 
+      ROLE_KEY, ROLE_ORDER, ROLE_STATUS, 
+      ROLE_DLE_FLAG)
+    values (#{roleGuid,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{deleteDate,jdbcType=TIMESTAMP}, #{createUserLabel,jdbcType=VARCHAR}, #{updateUserLabel,jdbcType=VARCHAR}, 
+      #{deleteUserLabel,jdbcType=VARCHAR}, #{recordVersion,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, 
+      #{roleKey,jdbcType=VARCHAR}, #{roleOrder,jdbcType=INTEGER}, #{roleStatus,jdbcType=INTEGER}, 
+      #{roleDleFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sans.core.entity.Role">
+    <!--
+    @mbg.generated
+    -->
+    insert into t_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleGuid != null">
+        ROLE_GUID,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="deleteDate != null">
+        DELETE_DATE,
+      </if>
+      <if test="createUserLabel != null">
+        CREATE_USER_LABEL,
+      </if>
+      <if test="updateUserLabel != null">
+        UPDATE_USER_LABEL,
+      </if>
+      <if test="deleteUserLabel != null">
+        DELETE_USER_LABEL,
+      </if>
+      <if test="recordVersion != null">
+        RECORD_VERSION,
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME,
+      </if>
+      <if test="roleKey != null">
+        ROLE_KEY,
+      </if>
+      <if test="roleOrder != null">
+        ROLE_ORDER,
+      </if>
+      <if test="roleStatus != null">
+        ROLE_STATUS,
+      </if>
+      <if test="roleDleFlag != null">
+        ROLE_DLE_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleGuid != null">
+        #{roleGuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null">
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserLabel != null">
+        #{createUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserLabel != null">
+        #{updateUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteUserLabel != null">
+        #{deleteUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="recordVersion != null">
+        #{recordVersion,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleKey != null">
+        #{roleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="roleOrder != null">
+        #{roleOrder,jdbcType=INTEGER},
+      </if>
+      <if test="roleStatus != null">
+        #{roleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="roleDleFlag != null">
+        #{roleDleFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sans.core.entity.Role">
+    <!--
+    @mbg.generated
+    -->
+    update t_role
+    <set>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null">
+        DELETE_DATE = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserLabel != null">
+        CREATE_USER_LABEL = #{createUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserLabel != null">
+        UPDATE_USER_LABEL = #{updateUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteUserLabel != null">
+        DELETE_USER_LABEL = #{deleteUserLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="recordVersion != null">
+        RECORD_VERSION = #{recordVersion,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleKey != null">
+        ROLE_KEY = #{roleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="roleOrder != null">
+        ROLE_ORDER = #{roleOrder,jdbcType=INTEGER},
+      </if>
+      <if test="roleStatus != null">
+        ROLE_STATUS = #{roleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="roleDleFlag != null">
+        ROLE_DLE_FLAG = #{roleDleFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ROLE_GUID = #{roleGuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sans.core.entity.Role">
+    <!--
+    @mbg.generated
+    -->
+    update t_role
+    set CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      DELETE_DATE = #{deleteDate,jdbcType=TIMESTAMP},
+      CREATE_USER_LABEL = #{createUserLabel,jdbcType=VARCHAR},
+      UPDATE_USER_LABEL = #{updateUserLabel,jdbcType=VARCHAR},
+      DELETE_USER_LABEL = #{deleteUserLabel,jdbcType=VARCHAR},
+      RECORD_VERSION = #{recordVersion,jdbcType=INTEGER},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_KEY = #{roleKey,jdbcType=VARCHAR},
+      ROLE_ORDER = #{roleOrder,jdbcType=INTEGER},
+      ROLE_STATUS = #{roleStatus,jdbcType=INTEGER},
+      ROLE_DLE_FLAG = #{roleDleFlag,jdbcType=INTEGER}
+    where ROLE_GUID = #{roleGuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

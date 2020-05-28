@@ -1,0 +1,115 @@
+server:
+  port: 8764
+  servlet:
+    session:
+      timeout: 600
+#  servlet:
+#    session:
+#      timeout: 600
+
+# 日志配置
+logging:
+  level:
+    com.sans: debug
+    org.springframework: warn
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/MySecurity?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    hikari:
+      connection-test-query: select 1
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+    static-locations: classpath:/static/,classpath:/templates/,classpath:/resources/
+
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size:  10MB
+      # 设置总上传的文件大小
+      max-request-size:  20MB
+
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空
+    password:
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池中的最小空闲连接
+        min-idle: 0
+    ## 连接超时时间（毫秒）
+    timeout: 3000
+  #使用使用Redis缓存session数据
+  session:
+    store-type: redis
+
+
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: utf-8
+
+typeutil:
+  #登录成功或失败返回 Response JSON
+  loginSuccessType: Response
+  logintFailureType: Response
+  #security不拦截
+  antMatchers:  /layui/**,/quit/**,/toLogin/**,/jquery/**,/images/**,/css/**,/login/**,/ajax/**,/file/**,/fonts/**,/i18n/**,/img/**,/js/**,/ruoyi/**
+  #oauth不拦截
+  oauthMatchers:  /quit/**,/login/**,/toLogin/**,/apiLogin/**,/layui/**,/jquery/**,/images/**,/css/**,/ajax/**,/file/**,/fonts/**,/i18n/**,/img/**,/js/**,/ruoyi/**
+  #文件上传地址
+  profilePath:  F:/yzw/idea/My/springboot-security/uploadPath
+  #rememberMe记住我设置token时间
+  tokenValiditySeconds: 3600
+  #同一用户在系统中只能登录几次
+  maximumSession: 1
+  #
+
+#qq登录
+nrsc:
+  security:
+    social:
+      qq:
+        app-id: 100550231
+        app-secret: 69b6ab57b22f3c2fe6a6149274e3295e
+        providerId: callback.do
+        SignUpUrl:  toLogin/register
+      filterProcessesUrl: /qqLogin
+
+    oauth2:
+      #jwt令牌加密方式
+      jwtSigningKey: my
+      #是否是替换令牌为jwt 还是 redis
+      tokenStore: jwt
+
+thymeleaf:
+  mode: HTML
+  encoding: utf-8
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sans.core.entity
+
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+

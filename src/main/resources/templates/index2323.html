@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/jquery/jquery-2.2.4.min.js}"></script>
+    <style type="text/css">
+        #index-container,html,body{
+            margin:0px;
+            padding:0px;
+        }
+        #index-container{
+            width:100%;
+            height:auto;
+
+        }
+
+        #index-navigationbar{
+            width:100%;
+            height:60px;
+        }
+
+        #index-navigationbar ul{
+            padding-left:77%;
+        }
+
+        #index-commonmenu{
+            width: 15%;
+            height:519px;
+            float: left;
+        }
+        #indixe-tab{
+            width:84.9%;
+            height: 150px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<!--首页容器-->
+<div id="index-container">
+    <!--信息菜单-->
+    <div id="index-navigationbar">
+        <ul class="layui-nav" style="text-algin:right;background-color: black;">
+            <!--            <li class="layui-nav-item">-->
+            <!--                <a href="">控制台<span class="layui-badge">9</span></a>-->
+            <!--            </li>-->
+            <!--            <li class="layui-nav-item">-->
+            <!--                <a href="">个人中心<span class="layui-badge-dot"></span></a>-->
+            <!--            </li>-->
+            <li class="layui-nav-item" lay-unselect="">
+                <a href="javascript:;"><img th:src="@{/images/logo.ico}" class="layui-nav-img">你好,[[${userName}]]</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">修改信息</a></dd>
+                    <dd><a th:href="@{/logout}">退出</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <!--操作菜单-->
+    <div id="index-commonmenu">
+        <ul class="layui-nav layui-nav-tree" lay-filter="demo" style="margin-right:10px;height:538px;">
+
+        </ul>
+    </div>
+
+    <!--页面选项卡-->
+    <div id="indixe-tab">
+        <div class="layui-tab" lay-allowClose="true" lay-filter="demo1" style="margin:0px;padding:0px;">
+            <ul class="layui-tab-title">
+
+            </ul>
+            <div class="layui-tab-content" style="margin:0px;padding:0px;">
+
+            </div>
+        </div>
+    </div>
+
+    <div style="clear: both"></div>
+
+</div>
+</body>
+</html>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        let $ = layui.jquery,
+            element = layui.element;
+
+        element.on('nav(demo)', function(elem){
+            console.log(elem.getAttribute("meun_id")); //得到当前点击的DOM对象
+            let id=$(this).attr("meun_id");
+            if(typeof(id)!="undefined"){
+                console.log('进入方法');
+                element.tabAdd('demo1', {
+                    title: '新选项'+ (Math.random()*1000|0) //用于演示
+                    ,content: '<iframe src="test.html" style="width:100%;height:491px;" scrolling="auto" frameborder="0"></iframe>'
+                    ,id: id//实际使用一般是规定好的id，这里以时间戳模拟下z
+                })
+                element.tabChange('demo1', id);
+            }
+        });
+        //获取所有的菜单
+        $.ajax({
+            type:"GET",
+            url:"/index/menu",
+            dataType:"json",
+            success:function(data){
+                //先添加所有的主材单
+                $.each(data,function(i,obj){
+                    let content='<li class="layui-nav-item">';
+                    content+='<a href="javascript:;">'+obj.menuName+'</a>';
+                    //这里是添加所有的子菜单
+                    content+=loadchild(obj);
+                    content+='</li>';
+                    $(".layui-nav-tree").append(content);
+                });
+                element.init();
+            },
+            error:function(jqXHR){
+                alert("发生错误："+ jqXHR.status);
+            }
+        });
+
+        //组装子菜单的方法
+        function loadchild(obj){
+            if(obj==null){
+                return;
+            }
+            let content='';
+            if(obj.children!=null && obj.children.length>0){
+                content+='<dl class="layui-nav-child">';
+            }else{
+                content+='<dl>';
+            }
+
+            if(obj.children!=null && obj.children.length>0){
+                $.each(obj.children,function(i,note){
+                    content+='<dd>';
+                    content+='<a href="javascript:;">'+note.menuName+'</a>';
+                    if(note.children==null){
+                        return;
+                    }
+                    content+=loadchild(note);
+                    content+='</dd>';
+                });
+
+                content+='</dl>';
+            }
+            return content;
+        }
+    });
+</script>
+
