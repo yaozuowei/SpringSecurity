@@ -5,7 +5,7 @@ server:
       timeout: 600
 #  servlet:
 #    session:
-#      timeout: 600
+#      timeout: 6000
 
 # 日志配置
 logging:
