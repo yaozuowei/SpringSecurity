@@ -1,7 +1,6 @@
 package com.sans.oauth2.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
@@ -66,9 +65,8 @@ public class MyAuthenticationSuccessHandler2 extends SavedRequestAwareAuthentica
         // 对获取到的clientDetails进行校验
         if (clientDetails == null) {
             throw new UnapprovedClientAuthenticationException("clientId对应的配置信息不存在:" + clientId);
-        } else if (!StringUtils.equals(clientDetails.getClientSecret(), clientSecret)) {
+        } else if (!StringUtils.equals(clientDetails.getClientSecret(), clientSecret))
             throw new UnapprovedClientAuthenticationException("clientSecret不匹配:" + clientId);
-        }
 
         //第一个参数为请求参数的一个Map集合，
         // 在Spring Security OAuth的源码里要用这个Map里的用户名+密码或授权码来生成Authentication对象,
