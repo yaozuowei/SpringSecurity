@@ -1,7 +1,7 @@
-package com.sans.SocialLogin.QQ.conncet;
+package com.sans.sociallogin.qq.conncet;
 
-import com.sans.SocialLogin.QQ.api.QQUserInfo;
-import com.sans.SocialLogin.QQ.api.QQ;
+import com.sans.sociallogin.qq.api.QQUserInfo;
+import com.sans.sociallogin.qq.api.QQ;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;

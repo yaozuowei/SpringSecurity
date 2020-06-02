@@ -1,4 +1,4 @@
-package com.sans.SocialLogin.QQ.conncet;
+package com.sans.sociallogin.qq.conncet;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;

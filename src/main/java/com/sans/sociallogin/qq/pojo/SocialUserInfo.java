@@ -1,4 +1,4 @@
-package com.sans.SocialLogin.QQ.pojo;
+package com.sans.sociallogin.qq.pojo;
 
 import lombok.Data;
 

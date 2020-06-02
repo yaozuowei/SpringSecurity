@@ -1,8 +1,6 @@
-package com.sans.SocialLogin;
+package com.sans.sociallogin;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sans.common.util.ResultUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.view.AbstractView;
 
 import javax.servlet.http.HttpServletRequest;

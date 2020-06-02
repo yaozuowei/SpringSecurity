@@ -1,4 +1,4 @@
-package com.sans.SocialLogin;
+package com.sans.sociallogin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sans.common.util.ResultUtil;

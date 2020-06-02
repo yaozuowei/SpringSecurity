@@ -1,7 +1,7 @@
-package com.sans.SocialLogin.QQ.conncet;
+package com.sans.sociallogin.qq.conncet;
 
-import com.sans.SocialLogin.QQ.api.QQ;
-import com.sans.SocialLogin.QQ.api.QQImpl;
+import com.sans.sociallogin.qq.api.QQ;
+import com.sans.sociallogin.qq.api.QQImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 

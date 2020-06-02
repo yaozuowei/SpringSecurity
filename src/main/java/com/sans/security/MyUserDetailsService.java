@@ -1,6 +1,6 @@
 package com.sans.security;
 
-import com.sans.SocialLogin.QQ.pojo.MySocialUser;
+import com.sans.sociallogin.qq.pojo.MySocialUser;
 import com.sans.core.entity.Role;
 import com.sans.core.entity.User;
 import com.sans.core.service.RoleService;

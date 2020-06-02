@@ -1,4 +1,4 @@
-package com.sans.SocialLogin.QQ.config;
+package com.sans.sociallogin.qq.config;
 
 import org.springframework.core.env.Environment;
 import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;

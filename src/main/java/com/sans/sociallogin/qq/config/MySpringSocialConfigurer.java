@@ -1,4 +1,4 @@
-package com.sans.SocialLogin.QQ.config;
+package com.sans.sociallogin.qq.config;
 
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;

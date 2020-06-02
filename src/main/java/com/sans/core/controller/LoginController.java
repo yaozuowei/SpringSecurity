@@ -1,6 +1,6 @@
 package com.sans.core.controller;
 
-import com.sans.SocialLogin.QQ.pojo.SocialUserInfo;
+import com.sans.sociallogin.qq.pojo.SocialUserInfo;
 import com.sans.common.BaseController;
 import com.sans.common.MyConstants;
 import com.sans.common.entity.ImageCode;

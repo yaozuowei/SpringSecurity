@@ -1,8 +1,8 @@
-package com.sans.SocialLogin.QQ.config;
+package com.sans.sociallogin.qq.config;
 
-import com.sans.SocialLogin.MyConnectView;
-import com.sans.SocialLogin.QQ.conncet.QQConnectionFactory;
-import com.sans.SocialLogin.QQ.properties.QQProperties;
+import com.sans.sociallogin.MyConnectView;
+import com.sans.sociallogin.qq.conncet.QQConnectionFactory;
+import com.sans.sociallogin.qq.properties.QQProperties;
 import com.sans.common.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

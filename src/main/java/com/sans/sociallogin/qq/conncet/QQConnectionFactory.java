@@ -1,6 +1,6 @@
-package com.sans.SocialLogin.QQ.conncet;
+package com.sans.sociallogin.qq.conncet;
 
-import com.sans.SocialLogin.QQ.api.QQ;
+import com.sans.sociallogin.qq.api.QQ;
 import org.springframework.social.connect.support.OAuth2ConnectionFactory;
 
 /**

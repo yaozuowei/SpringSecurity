@@ -1,4 +1,4 @@
-package com.sans.SocialLogin.QQ.pojo;
+package com.sans.sociallogin.qq.pojo;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.social.security.SocialUser;

@@ -1,6 +1,6 @@
 package com.sans.common.properties;
 
-import com.sans.SocialLogin.QQ.properties.SocialProperties;
+import com.sans.sociallogin.qq.properties.SocialProperties;
 import com.sans.oauth2.propertion.Oauth2ServerProperties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

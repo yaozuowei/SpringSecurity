@@ -1,4 +1,4 @@
-package com.sans.SocialLogin.QQ.config;
+package com.sans.sociallogin.qq.config;
 
 import com.sans.common.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;

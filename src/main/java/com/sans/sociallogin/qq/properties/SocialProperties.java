@@ -1,4 +1,4 @@
-package com.sans.SocialLogin.QQ.properties;
+package com.sans.sociallogin.qq.properties;
 
 import lombok.Data;
 
